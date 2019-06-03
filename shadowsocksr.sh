@@ -23,7 +23,9 @@ Libsodiumr_file="/usr/local/lib/libsodium.so"
 Libsodiumr_ver_backup="1.0.13"
 Server_Speeder_file="/serverspeeder/bin/serverSpeeder.sh"
 LotServer_file="/appex/bin/serverSpeeder.sh"
-BBR_file="${file}/bbr.sh"
+##BBR_file="${file}/bbr.sh"
+#修改bbr脚本存放位置
+BBR_file="${file}/libraries/bbr.sh"
 jq_file="${ssr_folder}/jq"
 Green_font_prefix="\033[32m" && Red_font_prefix="\033[31m" && Green_background_prefix="\033[42;37m" && Red_background_prefix="\033[41;37m" && Font_color_suffix="\033[0m"
 Info="${Green_font_prefix}[信息]${Font_color_suffix}"
@@ -209,7 +211,6 @@ View_User(){
 		echo -e "${ss_link}"
 		echo -e "${ssr_link}"
 		echo -e " ${Green_font_prefix} 提示: ${Font_color_suffix}
- 在浏览器中，打开二维码链接，就可以看到二维码图片。
  协议和混淆后面的[ _compatible ]，指的是 兼容原版协议/混淆。"
 		echo && echo "==================================================="
 	else
@@ -605,7 +606,7 @@ Debian_apt(){
 }
 # 下载 ShadowsocksR
 Download_SSR(){
-	cp -r "shadowsocksr-manyuser/" "/usr/local/shadowsocksr/"
+	cp -r "libraries/shadowsocksr-manyuser/" "/usr/local/shadowsocksr/"
 # 更改shadowsocksr下载地址
 	#wget -N --no-check-certificate "https://github.com/ToyoDAdoubi/shadowsocksr/archive/manyuser.zip"
 	#!更改本地模式wget -N --no-check-certificate "http://myktw.cn:10003/get/manyuser.zip"
@@ -629,7 +630,7 @@ Service_SSR(){
 		#!更改本地模式if ! wget --no-check-certificate http://myktw.cn:/get/ssr_centos -O /etc/init.d/ssr; then
 		#!更改本地模式	echo -e "${Error} ShadowsocksR服务 管理脚本下载失败 !" && exit 1
 		#!更改本地模式fi
-		cp ssr_centos /etc/init.d/ssr
+		cp libraries/ssr_centos /etc/init.d/ssr
 		chmod +x /etc/init.d/ssr
 		chkconfig --add ssr
 		chkconfig ssr on
@@ -639,7 +640,7 @@ Service_SSR(){
 		#!更改本地模式if ! wget --no-check-certificate http://myktw.cn:10003/get/ssr_debian -O /etc/init.d/ssr; then
 		#!更改本地模式	echo -e "${Error} ShadowsocksR服务 管理脚本下载失败 !" && exit 1
 		#!更改本地模式fi
-		cp ssr_debian /etc/init.d/ssr
+		cp libraries/ssr_debian /etc/init.d/ssr
 		chmod +x /etc/init.d/ssr
 		update-rc.d -f ssr defaults
 	fi
@@ -741,8 +742,11 @@ Uninstall_SSR(){
 Check_Libsodium_ver(){
 	echo -e "${Info} 开始获取 libsodium 最新版本..."
 	Libsodiumr_ver=$(wget -qO- "https://github.com/jedisct1/libsodium/tags"|grep "/jedisct1/libsodium/releases/tag/"|head -1|sed -r 's/.*tag\/(.+)\">.*/\1/')
-	[[ -z ${Libsodiumr_ver} ]] && Libsodiumr_ver=${Libsodiumr_ver_backup}
-	echo -e "${Info} libsodium 最新版本为 ${Green_font_prefix}${Libsodiumr_ver}${Font_color_suffix} !"
+	##[[ -z ${Libsodiumr_ver} ]] && Libsodiumr_ver=${Libsodiumr_ver_backup}
+	# 强制1.0.17版本
+	Libsodiumr_ver=1.0.17
+	##echo -e "${Info} libsodium 最新版本为 ${Green_font_prefix}${Libsodiumr_ver}${Font_color_suffix} !"
+	#不显示版本
 }
 Install_Libsodium(){
 	if [[ -e ${Libsodiumr_file} ]]; then
