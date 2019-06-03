@@ -208,10 +208,10 @@ View_User(){
 		echo -e " 设备数限制 : ${Green_font_prefix}${protocol_param}${Font_color_suffix}"
 		echo -e " 单线程限速 : ${Green_font_prefix}${speed_limit_per_con} KB/S${Font_color_suffix}"
 		echo -e " 端口总限速 : ${Green_font_prefix}${speed_limit_per_user} KB/S${Font_color_suffix}"
-		echo -e "${ss_link}"
+##	echo -e "${ss_link}"
 		echo -e "${ssr_link}"
-		echo -e " ${Green_font_prefix} 提示: ${Font_color_suffix}
- 协议和混淆后面的[ _compatible ]，指的是 兼容原版协议/混淆。"
+##	echo -e " ${Green_font_prefix} 提示: ${Font_color_suffix}
+##协议和混淆后面的[ _compatible ]，指的是 兼容原版协议/混淆。"
 		echo && echo "==================================================="
 	else
 		user_total=`${jq_file} '.port_password' ${config_user_file} | sed '$d' | sed "1d" | wc -l`
