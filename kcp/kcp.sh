@@ -84,3 +84,6 @@ screen -x -S "$yh"$screen_name"$yh" -p 0 -X stuff "$cmd"
 screen -x -S "$yh"$screen_name"$yh" -p 0 -X stuff $'\n'
 EOF
 echo -e 服务器启动脚本路径$(pwd)/$shellname
+echo -e 自动启动中
+bash $shellname
+echo -e 启动完成
