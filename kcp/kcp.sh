@@ -1,5 +1,6 @@
 #!/bin/bash
 shellname=kcpshell.sh
+yh='"'
 chmod +x server_linux_amd64
 apt update && apt install -y screen curl
 Autoip=$(curl members.3322.org/dyndns/getip)
@@ -25,7 +26,7 @@ stty erase '^H' && read -p "(客户端使用核心数量 默认: 2):" ccore
 	cat > server.kcptun.json <<-EOF
 {
 	"target": "127.0.0.1:$speedprot",
-	"listen": ":$localprot"
+	"listen": ":$localprot",
 	"key": "$key",
 	"crypt": "$crypt",
 	"mode": "$speedmodel",
@@ -45,28 +46,28 @@ stty erase '^H' && read -p "(客户端使用核心数量 默认: 2):" ccore
 EOF
 echo -e "客户端配置开始-->
 {
-	"localaddr": ":$speedprot",
-	"remoteaddr": "$remoteip:$localprot",
-	"key": "$key",
-	"crypt": "$crypt",
-	"mode": "$speedmodel",
-	"mtu": 1350,
-	"sndwnd": 512,
-	"rcvwnd": 512,
-	"datashard": 10,
-	"parityshard": 3,
-	"dscp": 46,
-	"nocomp": true,
-	"quiet": false,
-	"sockbuf": 16777217,
-	"scavengettl": -1,
-	"dscp": 46,
-	"conn": $ccore
+	"$yh"localaddr"$yh": "$yh":$speedprot"$yh",
+	"$yh"remoteaddr"$yh": "$yh"$remoteip:$localprot"$yh",
+	"$yh"key"$yh": "$yh"$key"$yh",
+	"$yh"crypt"$yh": "$yh"$crypt"$yh",
+	"$yh"mode"$yh": "$yh"$speedmodel"$yh",
+	"$yh"mtu"$yh": 1350,
+	"$yh"sndwnd"$yh": 512,
+	"$yh"rcvwnd"$yh": 512,
+	"$yh"datashard"$yh": 10,
+	"$yh"parityshard"$yh": 3,
+	"$yh"dscp"$yh": 46,
+	"$yh"nocomp"$yh": true,
+	"$yh"quiet"$yh": false,
+	"$yh"sockbuf"$yh": 16777217,
+	"$yh"scavengettl"$yh": -1,
+	"$yh"dscp"$yh": 46,
+	"$yh"conn"$yh": $ccore
 }
 <--客户端配置结束"
 
 screen_name=$"kcp"
-cmd=$"cd $(pwd)&&server_linux_amd64 -c $shellname"
+cmd=$"cd $(pwd)&&./server_linux_amd64 -c server.kcptun.json"
 cat > ${shellname} <<-EOF
 #!/bin/bash
 screen -dmS $screen_name
