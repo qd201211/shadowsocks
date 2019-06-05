@@ -1,8 +1,18 @@
 #!/bin/bash
+#apt update && apt install -y screen curl
+	if [[ -z "curl --version" ]]; then
+		echo -e "没有安装curl，开始安装..."
+			apt update
+			apt-get install -y python
+	fi
+	if [[ -z "screen --version" ]]; then
+		echo -e "没有安装screen，开始安装..."
+			apt update
+			apt-get install -y python
+	fi
 shellname=kcpshell.sh
 yh='"'
 chmod +x server_linux_amd64
-apt update && apt install -y screen curl
 Autoip=$(curl members.3322.org/dyndns/getip)
 clear
 echo 开始生成配置
@@ -70,8 +80,8 @@ screen_name=$"kcp"
 cmd=$"cd $(pwd)&&./server_linux_amd64 -c server.kcptun.json"
 cat > ${shellname} <<-EOF
 #!/bin/bash
-screen -dmS $screen_name
-screen -x -S $screen_name -p 0 -X stuff "$cmd"
-screen -x -S $screen_name -p 0 -X stuff $'\n'
+screen -dmS "$yh"$screen_name"$yh"
+screen -x -S "$yh"$screen_name"$yh" -p 0 -X stuff "$cmd"
+screen -x -S "$yh"$screen_name"$yh" -p 0 -X stuff $'\n'
 EOF
 echo -e 服务器启动脚本路径$(pwd)/$shellname
