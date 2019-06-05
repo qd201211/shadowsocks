@@ -1,5 +1,4 @@
 #!/bin/bash
-#apt update && apt install -y screen curl
 	if [[ -z "curl --version" ]]; then
 		echo -e "没有安装curl，开始安装..."
 			apt update
