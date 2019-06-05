@@ -1,8 +1,8 @@
 #!/bin/bash
 shellname=kcpshell.sh
 chmod +x server_linux_amd64
+apt update && apt install -y screen curl
 Autoip=$(curl members.3322.org/dyndns/getip)
-apt update && apt install -y screen
 clear
 echo 开始生成配置
 stty erase '^H' && read -p "(加速端口 默认: 7777):" speedprot
