@@ -85,6 +85,7 @@ screen -x -S "$screen_name" -p 0 -X stuff "$cmd"
 screen -x -S "$screen_name" -p 0 -X stuff $'\n'
 EOF
 echo -e 服务器启动脚本路径$(pwd)/$shellname
+chmod +x $shellname
 echo -e 自动启动中
 bash $shellname
 echo -e 启动完成
