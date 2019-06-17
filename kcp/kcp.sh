@@ -1,7 +1,9 @@
 #!/bin/bash
 shellname=kcpshell.sh
-	apt update&&apt install curl screen -y
 yh='"'
+	apt update&&apt install curl screen sysv-rc-conf -y
+	cp /usr/sbin/sysv-rc-conf /usr/sbin/chkconfig
+
 chmod +x server_linux_amd64
 	ip=$(wget -qO- -t1 -T2 ipinfo.io/ip)
 	if [[ -z "${ip}" ]]; then
@@ -84,8 +86,10 @@ screen -dmS "$screen_name"
 screen -x -S "$screen_name" -p 0 -X stuff "$cmd"
 screen -x -S "$screen_name" -p 0 -X stuff $'\n'
 EOF
-echo -e 服务器启动脚本路径$(pwd)/$shellname
-chmod +x $shellname
+#echo -e 服务器启动脚本路径$(pwd)/$shellname
 echo -e 自动启动中
+chmod +x $shellname
+chkconfig --add $shellname
+chkconfig $shellname on
 bash $shellname
 echo -e 启动完成
