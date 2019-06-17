@@ -91,5 +91,6 @@ echo -e 自动启动中
 chmod +x $shellname
 chkconfig --add $shellname
 chkconfig $shellname on
+cp $shellname /etc/init.d
 bash $shellname
 echo -e 启动完成
