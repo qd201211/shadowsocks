@@ -61,29 +61,29 @@ EOF
 
 	cat > client/client.kcptun.json <<-EOF
 {
-	"$yh"localaddr"$yh": "$yh":$speedprot"$yh",
-	"$yh"remoteaddr"$yh": "$yh"$remoteip:$localprot"$yh",
-	"$yh"key"$yh": "$yh"$key"$yh",
-	"$yh"crypt"$yh": "$yh"$crypt"$yh",
-	"$yh"mode"$yh": "$yh"$speedmodel"$yh",
-	"$yh"mtu"$yh": 1350,
-	"$yh"sndwnd"$yh": 512,
-	"$yh"rcvwnd"$yh": 512,
-	"$yh"datashard"$yh": 10,
-	"$yh"parityshard"$yh": 3,
-	"$yh"dscp"$yh": 46,
-	"$yh"nocomp"$yh": true,
-	"$yh"quiet"$yh": false,
-	"$yh"sockbuf"$yh": 16777217,
-	"$yh"scavengettl"$yh": -1,
-	"$yh"dscp"$yh": 46,
-	"$yh"conn"$yh": $ccore
+	"localaddr": ":$speedprot",
+	"remoteaddr": "$remoteip:$localprot",
+	"key": "$key",
+	"crypt": "$crypt",
+	"mode": "$speedmodel",
+	"mtu": 1350,
+	"sndwnd": 512,
+	"rcvwnd": 512,
+	"datashard": 10,
+	"parityshard": 3,
+	"dscp": 46,
+	"nocomp": true,
+	"quiet": false,
+	"sockbuf": 16777217,
+	"scavengettl": -1,
+	"dscp": 46,
+	"conn": $ccore
 }
 EOF
 
 echo -e "客户端配置开始-->
 {
-	"$yh"localaddr"$yh": "$yh":$speedprot"$yh",
+	"$yhy"localaddr"$yh": "$yh":$speedprot"$yh",
 	"$yh"remoteaddr"$yh": "$yh"$remoteip:$localprot"$yh",
 	"$yh"key"$yh": "$yh"$key"$yh",
 	"$yh"crypt"$yh": "$yh"$crypt"$yh",
@@ -122,7 +122,7 @@ EOF
 #*服务器配置
 
 #*客户端配置
-cat > client.${shellname} <<-EOF
+cat > client/client.kcpshell.sh <<-EOF
 #!/bin/bash
 screen -dmS "kcp"
 screen -x -S "kcp" -p 0 -X stuff "cd $(pwd)&&./server_linux_amd64 -c client.kcptun.json"
