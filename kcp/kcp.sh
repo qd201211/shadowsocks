@@ -116,7 +116,7 @@ screen -dmS "kcp"
 screen -x -S "kcp" -p 0 -X stuff "cd $(pwd)&&./server_linux_amd64 -c server.kcptun.json"
 screen -x -S "kcp" -p 0 -X stuff $'\n'
 screen -dmS "kcpudp"
-screen -x -S "kcpudp" -p 0 -X stuff "cd $(pwd)&&./udp2raw_amd64 -s -l0.0.0.0:$localpro -r 127.0.0.1:29900 -k 84RftO0agXxUwB4X  --raw-mode faketcp -a"
+screen -x -S "kcpudp" -p 0 -X stuff "cd $(pwd)&&./udp2raw_amd64 -s -l0.0.0.0:$localprot -r 127.0.0.1:29900 -k 84RftO0agXxUwB4X  --raw-mode faketcp -a"
 screen -x -S "kcpudp" -p 0 -X stuff $'\n'
 EOF
 #*服务器配置
