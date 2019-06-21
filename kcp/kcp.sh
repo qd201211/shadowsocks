@@ -62,7 +62,7 @@ EOF
 	cat > client/client.kcptun.json <<-EOF
 {
 	"localaddr": ":$speedprot",
-	"remoteaddr": "$remoteip:$localprot",
+	"remoteaddr": "127.0.0.1:$localprot",
 	"key": "$key",
 	"crypt": "$crypt",
 	"mode": "$speedmodel",
@@ -125,10 +125,10 @@ EOF
 cat > client/client.kcpshell.sh <<-EOF
 #!/bin/bash
 screen -dmS "kcp"
-screen -x -S "kcp" -p 0 -X stuff "cd $(pwd)&&./server_linux_amd64 -c client.kcptun.json"
+screen -x -S "kcp" -p 0 -X stuff "./client_linux_amd64 -c client.kcptun.json"
 screen -x -S "kcp" -p 0 -X stuff $'\n'
 screen -dmS "kcpudp"
-screen -x -S "kcpudp" -p 0 -X stuff "cd $(pwd)&&./udp2raw_amd64 -c -l0.0.0.0:$speedprot -r $remoteip:$localprot -k 84RftO0agXxUwB4X  --raw-mode faketcp -a"
+screen -x -S "kcpudp" -p 0 -X stuff "./udp2raw_amd64 -c -l0.0.0.0:$localprot -r $remoteip:$localprot -k 84RftO0agXxUwB4X  --raw-mode faketcp -a"
 screen -x -S "kcpudp" -p 0 -X stuff $'\n'
 EOF
 move client.${shellname} client/
