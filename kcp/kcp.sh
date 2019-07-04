@@ -133,15 +133,15 @@ EOF
 #*服务器配置
 
 #*客户端配置
-cat > client/start.screen.sh <<-EOF
+##*cat > client/start.screen.sh <<-EOF
 #!/bin/bash
-screen -dmS "kcp"
-screen -x -S "kcp" -p 0 -X stuff "sh start.kcp.sh"
-screen -x -S "kcp" -p 0 -X stuff $'\n'
-screen -dmS "kcpudp"
-screen -x -S "kcpudp" -p 0 -X stuff "sh start.udp.sh"
-screen -x -S "kcpudp" -p 0 -X stuff $'\n'
-EOF
+##*screen -dmS "kcp"
+##*screen -x -S "kcp" -p 0 -X stuff "sh start.kcp.sh"
+##*screen -x -S "kcp" -p 0 -X stuff $'\n'
+##*screen -dmS "kcpudp"
+##*screen -x -S "kcpudp" -p 0 -X stuff "sh start.udp.sh"
+##*screen -x -S "kcpudp" -p 0 -X stuff $'\n'
+##*EOF
 cat > client/start.kcp.sh <<-EOF
 #!/bin/bash
 ./client_linux_amd64 -c client.kcptun.json
